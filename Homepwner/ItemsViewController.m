@@ -39,7 +39,7 @@
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  return self.itemStore.allItems.count;
+  return self.itemStore.allItems.count + 1;
 }
 
 //- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -49,6 +49,12 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"UITableViewCell" forIndexPath:indexPath];
+  
+  if (indexPath.row == [_itemStore.allItems count]) {
+    cell.textLabel.text = @"No more items";
+    cell.detailTextLabel.text = @"NO MORE";
+    return cell;
+  }
   
   Item *item = self.itemStore.allItems[indexPath.row];
   
